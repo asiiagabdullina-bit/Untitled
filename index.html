@@ -219,8 +219,7 @@ Macro.add('changeEnergy', {
 /* ========================= АВТОДОБАВЛЕНИЕ ВИДЕО-ФОНА ========================= */
 $(document).ready(function() {
   if (!$('#bg-video').length) {
-    /* Приставка images/ успешно удалена, так как файл лежит в корне */
-    $('<video autoplay loop muted playsinline id="bg-video"><source src="water.mp4" type="video/mp4"></video>').appendTo('body');
+    $('<video autoplay loop muted playsinline preload="auto" id="bg-video"><source src="water.mp4" type="video/mp4"></video>').appendTo('body');
   }
 });</script><tw-tag name="gameover" color="green"></tw-tag><tw-passagedata pid="1" name="Monday_Start" tags="" position="775,150" size="100,100">MONDAY
 ENERGY: $visibleEnergy%
@@ -932,7 +931,7 @@ GAME OVER
 Your resources have dropped below the critical limit. You couldn&#39;t handle the load.
 </tw-passagedata><tw-passagedata pid="102" name="Game_Start" tags="" position="775,25" size="100,100">Hi. Welcome to the game. 
 
-I invite you to experience a week in the shoes of an expat going through a depressive episode.
+I invite you to experience a week in the shoes of an immigrant going through a depressive episode.
 
 Game rules: At the start of the week, you get 100% energy. It will decrease or increase depending on your actions. Your goal is to not let it drop below zero.
 
