@@ -222,7 +222,6 @@ Macro.add('changeEnergy', {
 /* ========================= СОЗДАНИЕ ОБОИХ ВИДЕОФОНОВ ========================= */
 
 $(document).on(':storyready', function () {
-    /* Функция для быстрой настройки стилей видео */
     function applyVideoStyles(video) {
         video.autoplay = true;
         video.loop = true;
@@ -237,17 +236,17 @@ $(document).on(':storyready', function () {
         video.style.zIndex = '-100';
         video.style.transform = 'translate(-50%, -50%)';
         video.style.objectFit = 'contain';
-        video.style.display = 'none'; /* По умолчанию скрываем оба */
+        video.style.display = 'none'; 
     }
 
-    /* 1. Создаем основное видео с вулканом */
+    /* 1. Вулкан возвращен в папку images/ */
     if (!document.getElementById('bg-video')) {
         var videoVulcano = document.createElement('video');
         videoVulcano.id = 'bg-video';
         applyVideoStyles(videoVulcano);
 
         var srcVulcano = document.createElement('source');
-        srcVulcano.src = 'images/Untitled.vulcano.mp4';
+        srcVulcano.src = 'images/Untitled.vulcano.mp4'; 
         srcVulcano.type = 'video/mp4';
         videoVulcano.appendChild(srcVulcano);
         
@@ -255,15 +254,14 @@ $(document).on(':storyready', function () {
         videoVulcano.load();
     }
 
-    /* 2. Создаем финальное видео с облаками для Game Over */
+    /* 2. Облака возвращены в папку clouds/ */
     if (!document.getElementById('bg-gameover-video')) {
         var videoClouds = document.createElement('video');
         videoClouds.id = 'bg-gameover-video';
         applyVideoStyles(videoClouds);
 
         var srcClouds = document.createElement('source');
-        /* Путь указан строго по вашему запросу */
-        srcClouds.src = 'clouds/clouds2.mp4';
+        srcClouds.src = 'clouds/clouds2.mp4'; 
         srcClouds.type = 'video/mp4';
         videoClouds.appendChild(srcClouds);
 
@@ -288,7 +286,6 @@ $(document).on(':passagerender', function () {
     var isGameOver = tags.includes('gameover');
 
     if (isGameOver) {
-        /* На экране Game Over выключаем вулкан, включаем облака */
         videoVulcano.style.display = 'none';
         videoVulcano.pause();
 
@@ -297,7 +294,6 @@ $(document).on(':passagerender', function () {
             console.warn('Не удалось запустить видео с облаками:', error);
         });
     } else {
-        /* На всех остальных экранах включаем вулкан, выключаем облака */
         videoClouds.style.display = 'none';
         videoClouds.pause();
 
@@ -307,10 +303,26 @@ $(document).on(':passagerender', function () {
         });
     }
 });
+
+/* Обход блокировки автозапуска браузеров при первом клике по экрану */
+$(document).one('click', function () {
+    var videoVulcano = document.getElementById('bg-video');
+    var videoClouds = document.getElementById('bg-gameover-video');
+    var passage = Story.get(State.passage);
+    var tags = passage ? passage.tags : [];
+    
+    if (tags.includes('gameover')) {
+        if (videoClouds) videoClouds.play();
+    } else {
+        if (videoVulcano) videoVulcano.play();
+    }
+});
+
+/* Принудительное отключение окна подтверждения для кнопки RESTART */
 $(document).on('click', '#menu-item-restart a', function (e) {
-    e.preventDefault(); /* Блокируем стандартное фиолетово-красное окно */
+    e.preventDefault();
     e.stopPropagation();
-    Engine.restart();   /* Мгновенно перезапускаем игру без лишних вопросов */
+    Engine.restart();
 });
 </script><tw-tag name="gameover" color="green"></tw-tag><tw-passagedata pid="1" name="Monday_Start" tags="" position="775,150" size="100,100">MONDAY
 ENERGY: $visibleEnergy%
