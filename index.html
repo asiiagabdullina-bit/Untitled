@@ -239,14 +239,14 @@ $(document).on(':storyready', function () {
         video.style.display = 'none'; 
     }
 
-    /* 1. Вулкан возвращен в папку images/ */
+    /* 1. Вулкан (ИСПРАВЛЕНО ДЛЯ GITHUB PAGES: добавлен префикс ./) */
     if (!document.getElementById('bg-video')) {
         var videoVulcano = document.createElement('video');
         videoVulcano.id = 'bg-video';
         applyVideoStyles(videoVulcano);
 
         var srcVulcano = document.createElement('source');
-        srcVulcano.src = 'images/Untitled.vulcano.mp4'; 
+        srcVulcano.src = './images/Untitled.vulcano.mp4'; 
         srcVulcano.type = 'video/mp4';
         videoVulcano.appendChild(srcVulcano);
         
@@ -254,14 +254,14 @@ $(document).on(':storyready', function () {
         videoVulcano.load();
     }
 
-    /* 2. Облака возвращены в папку clouds/ */
+    /* 2. Облака (ИСПРАВЛЕНО ДЛЯ GITHUB PAGES: добавлен префикс ./) */
     if (!document.getElementById('bg-gameover-video')) {
         var videoClouds = document.createElement('video');
         videoClouds.id = 'bg-gameover-video';
         applyVideoStyles(videoClouds);
 
         var srcClouds = document.createElement('source');
-        srcClouds.src = 'clouds/clouds2.mp4'; 
+        srcClouds.src = './clouds/clouds2.mp4'; 
         srcClouds.type = 'video/mp4';
         videoClouds.appendChild(srcClouds);
 
@@ -304,7 +304,7 @@ $(document).on(':passagerender', function () {
     }
 });
 
-/* Обход блокировки автозапуска браузеров при первом клике по экрану */
+/* Обход блокировки автозапуска браузеров при первом клике */
 $(document).one('click', function () {
     var videoVulcano = document.getElementById('bg-video');
     var videoClouds = document.getElementById('bg-gameover-video');
